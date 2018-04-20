@@ -9,7 +9,7 @@ export class Drawing extends XmlComponent {
         if (imageData === undefined) {
             throw new Error("imageData cannot be undefined");
         }
-
+        
         this.root.push(new Inline(imageData.referenceId, imageData.dimensions));
     }
 }
