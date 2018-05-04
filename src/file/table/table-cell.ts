@@ -57,7 +57,7 @@ export class TableCellBorders extends XmlComponent {
     }
 
     public prepForXml(): IXmlableObject {
-        return this.root.length > 0 ? super.prepForXml(): '';
+        return this.root.length > 0 ? super.prepForXml() : "";
     }
 
     addTopBorder(style: BorderStyle, size: number, color: string) {
@@ -67,21 +67,21 @@ export class TableCellBorders extends XmlComponent {
     }
 
     addStartBorder(style: BorderStyle, size: number, color: string) {
-        const top = new BaseTableCellBorder("w:start");
-        top.setProperties(style, size, color);
-        this.root.push(top);
+        const left = new BaseTableCellBorder("w:start");
+        left.setProperties(style, size, color);
+        this.root.push(left);
     }
 
     addBottomBorder(style: BorderStyle, size: number, color: string) {
-        const top = new BaseTableCellBorder("w:bottom");
-        top.setProperties(style, size, color);
-        this.root.push(top);
+        const bottom = new BaseTableCellBorder("w:bottom");
+        bottom.setProperties(style, size, color);
+        this.root.push(bottom);
     }
 
     addEndBorder(style: BorderStyle, size: number, color: string) {
-        const top = new BaseTableCellBorder("w:end");
-        top.setProperties(style, size, color);
-        this.root.push(top);
+        const end = new BaseTableCellBorder("w:end");
+        end.setProperties(style, size, color);
+        this.root.push(end);
     }
 }
 
@@ -165,16 +165,19 @@ export class VAlign extends XmlComponent {
     }
 }
 
-
 export enum WidthType {
+    /** Auto. */
     AUTO = "auto",
+    /** Value is in twentieths of a point */
     DXA = "dxa",
+    /** No (empty) value. */
     NIL = "nil",
-    PERCENTAGE = 'pct'
+    /** Value is in percentage. */
+    PERCENTAGE = "pct",
 }
 
-class TableCellWidthAttributes extends XmlAttributeComponent<{ type: WidthType,  width: string | number}> {
-    protected xmlKeys = { width: "w:w", type:"w:type" };
+class TableCellWidthAttributes extends XmlAttributeComponent<{ type: WidthType; width: string | number }> {
+    protected xmlKeys = { width: "w:w", type: "w:type" };
 }
 
 /**
@@ -187,7 +190,7 @@ export class TableCellWidth extends XmlComponent {
         this.root.push(
             new TableCellWidthAttributes({
                 width: value,
-                type: type
+                type: type,
             }),
         );
     }
