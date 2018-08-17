@@ -65,6 +65,16 @@ export class Table extends XmlComponent {
         this.properties.fixedWidthLayout();
         return this;
     }
+
+    public setStyle(style: string) {
+        this.properties.setStyle(style);
+        return this;
+    }
+
+    public setTableIndent(indent: number) {
+        this.properties.setTableIndent(indent);
+        return this;
+    }
 }
 
 export class TableRow extends XmlComponent {

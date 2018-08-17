@@ -16,6 +16,16 @@ export class TableProperties extends XmlComponent {
         this.root.push(new TableLayout("fixed"));
         return this;
     }
+
+    public setStyle(style: string) {
+        this.root.push(new TableStyle(style));
+        return this;
+    }
+
+    public setTableIndent(indent: number) {
+        this.root.push(new TableIndent(indent));
+        return this;
+    }
 }
 
 interface ITableWidth {
@@ -44,5 +54,25 @@ class TableLayout extends XmlComponent {
     constructor(type: TableLayoutOptions) {
         super("w:tblLayout");
         this.root.push(new TableLayoutAttributes({ type }));
+    }
+}
+
+class TableStyleAttributes extends XmlAttributeComponent<{}> {
+    protected xmlKeys = { value: "w:val" };
+}
+class TableStyle extends XmlComponent {
+    constructor(style: string) {
+        super("w:tblStyle");
+        this.root.push(new TableStyleAttributes({ value: style }));
+    }
+}
+
+class TableIndentAttributes extends XmlAttributeComponent<{}> {
+    protected xmlKeys = { value: "w:w", type: "w:type" };
+}
+class TableIndent extends XmlComponent {
+    constructor(value: number) {
+        super("w:tblInd");
+        this.root.push(new TableIndentAttributes({ value: value, type: "dxa" }));
     }
 }
