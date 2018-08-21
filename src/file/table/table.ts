@@ -75,6 +75,10 @@ export class Table extends XmlComponent {
         this.properties.setTableIndent(indent);
         return this;
     }
+
+    get tableProperties() {
+        return this.properties;
+    }
 }
 
 export class TableRow extends XmlComponent {
