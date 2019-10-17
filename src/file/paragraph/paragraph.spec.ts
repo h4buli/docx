@@ -217,7 +217,7 @@ describe("Paragraph", () => {
         it("should add list paragraph style to JSON", () => {
             const numbering = new Numbering();
             const numberedAbstract = numbering.createAbstractNumbering();
-            numberedAbstract.createLevel(0, "lowerLetter", "%1)", "start");
+            numberedAbstract.createLevel(0, 1, "lowerLetter", "%1)", "start");
             const letterNumbering = numbering.createConcreteNumbering(numberedAbstract);
 
             paragraph.setNumbering(letterNumbering, 0);
@@ -238,7 +238,7 @@ describe("Paragraph", () => {
         it("it should add numbered properties", () => {
             const numbering = new Numbering();
             const numberedAbstract = numbering.createAbstractNumbering();
-            numberedAbstract.createLevel(0, "lowerLetter", "%1)", "start");
+            numberedAbstract.createLevel(0, 1, "lowerLetter", "%1)", "start");
             const letterNumbering = numbering.createConcreteNumbering(numberedAbstract);
 
             paragraph.setNumbering(letterNumbering, 0);

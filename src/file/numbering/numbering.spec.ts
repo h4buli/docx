@@ -53,7 +53,7 @@ describe("AbstractNumbering", () => {
     describe("#createLevel", () => {
         it("creates a level with the given characteristics", () => {
             const abstractNumbering = new AbstractNumbering(1);
-            const level = abstractNumbering.createLevel(3, "lowerLetter", "%1)", "end");
+            const level = abstractNumbering.createLevel(3, 1, "lowerLetter", "%1)", "end");
             const tree = new Formatter().format(level);
             expect(tree["w:lvl"]).to.include({ _attr: { "w:ilvl": 3, "w15:tentative": 1 } });
             expect(tree["w:lvl"]).to.include({ "w:start": [{ _attr: { "w:val": 1 } }] });
@@ -64,7 +64,7 @@ describe("AbstractNumbering", () => {
 
         it("uses 'start' as the default alignment", () => {
             const abstractNumbering = new AbstractNumbering(1);
-            const level = abstractNumbering.createLevel(3, "lowerLetter", "%1)");
+            const level = abstractNumbering.createLevel(3, 1, "lowerLetter", "%1)");
             const tree = new Formatter().format(level);
             expect(tree["w:lvl"]).to.include({ _attr: { "w:ilvl": 3, "w15:tentative": 1 } });
             expect(tree["w:lvl"]).to.include({ "w:start": [{ _attr: { "w:val": 1 } }] });
@@ -76,7 +76,7 @@ describe("AbstractNumbering", () => {
         describe("formatting methods: paragraph properties", () => {
             it("#indent", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerLetter", "%0.").indent({ left: 720 });
+                const level = abstractNumbering.createLevel(0, 1, "lowerLetter", "%0.").indent({ left: 720 });
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:ind": [{ _attr: { "w:left": 720 } }] }],
@@ -85,7 +85,7 @@ describe("AbstractNumbering", () => {
 
             it("#spacing", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerLetter", "%0.").spacing({ before: 50, after: 150 });
+                const level = abstractNumbering.createLevel(0, 1, "lowerLetter", "%0.").spacing({ before: 50, after: 150 });
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:spacing": [{ _attr: { "w:before": 50, "w:after": 150 } }] }],
@@ -94,7 +94,7 @@ describe("AbstractNumbering", () => {
 
             it("#center", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerLetter", "%0.").center();
+                const level = abstractNumbering.createLevel(0, 1, "lowerLetter", "%0.").center();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:jc": [{ _attr: { "w:val": "center" } }] }],
@@ -103,7 +103,7 @@ describe("AbstractNumbering", () => {
 
             it("#left", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.", "left").left();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.", "left").left();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:jc": [{ _attr: { "w:val": "left" } }] }],
@@ -112,7 +112,7 @@ describe("AbstractNumbering", () => {
 
             it("#right", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").right();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").right();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:jc": [{ _attr: { "w:val": "right" } }] }],
@@ -121,7 +121,7 @@ describe("AbstractNumbering", () => {
 
             it("#justified", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").justified();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").justified();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:jc": [{ _attr: { "w:val": "both" } }] }],
@@ -130,7 +130,7 @@ describe("AbstractNumbering", () => {
 
             it("#thematicBreak", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").thematicBreak();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").thematicBreak();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [
@@ -156,7 +156,7 @@ describe("AbstractNumbering", () => {
 
             it("#leftTabStop", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").leftTabStop(1200);
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").leftTabStop(1200);
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [
@@ -169,7 +169,7 @@ describe("AbstractNumbering", () => {
 
             it("#maxRightTabStop", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").maxRightTabStop();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").maxRightTabStop();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [
@@ -182,7 +182,7 @@ describe("AbstractNumbering", () => {
 
             it("#keepLines", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").keepLines();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").keepLines();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:keepLines": [] }],
@@ -191,7 +191,7 @@ describe("AbstractNumbering", () => {
 
             it("#keepNext", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").keepNext();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").keepNext();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:pPr": [{ "w:keepNext": [] }],
@@ -202,7 +202,7 @@ describe("AbstractNumbering", () => {
         describe("formatting methods: run properties", () => {
             it("#size", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").size(24);
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").size(24);
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:sz": [{ _attr: { "w:val": 24 } }] }],
@@ -211,7 +211,7 @@ describe("AbstractNumbering", () => {
 
             it("#smallCaps", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").smallCaps();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").smallCaps();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:smallCaps": [{ _attr: { "w:val": true } }] }],
@@ -220,7 +220,7 @@ describe("AbstractNumbering", () => {
 
             it("#allCaps", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").allCaps();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").allCaps();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:caps": [{ _attr: { "w:val": true } }] }],
@@ -229,7 +229,7 @@ describe("AbstractNumbering", () => {
 
             it("#strike", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").strike();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").strike();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:strike": [{ _attr: { "w:val": true } }] }],
@@ -238,7 +238,7 @@ describe("AbstractNumbering", () => {
 
             it("#doubleStrike", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").doubleStrike();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").doubleStrike();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:dstrike": [{ _attr: { "w:val": true } }] }],
@@ -247,7 +247,7 @@ describe("AbstractNumbering", () => {
 
             it("#subScript", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").subScript();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").subScript();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:vertAlign": [{ _attr: { "w:val": "subscript" } }] }],
@@ -256,7 +256,7 @@ describe("AbstractNumbering", () => {
 
             it("#superScript", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").superScript();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").superScript();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:vertAlign": [{ _attr: { "w:val": "superscript" } }] }],
@@ -265,7 +265,7 @@ describe("AbstractNumbering", () => {
 
             it("#font", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").font("Times");
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").font("Times");
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:rFonts": [{ _attr: { "w:ascii": "Times", "w:hAnsi": "Times" } }] }],
@@ -274,7 +274,7 @@ describe("AbstractNumbering", () => {
 
             it("#bold", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").bold();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").bold();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:b": [{ _attr: { "w:val": true } }] }],
@@ -283,7 +283,7 @@ describe("AbstractNumbering", () => {
 
             it("#italics", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").italics();
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").italics();
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:i": [{ _attr: { "w:val": true } }] }],
@@ -293,7 +293,7 @@ describe("AbstractNumbering", () => {
             describe("#underline", () => {
                 it("should set underline to 'single' if no arguments are given", () => {
                     const abstractNumbering = new AbstractNumbering(1);
-                    const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").underline();
+                    const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").underline();
                     const tree = new Formatter().format(level);
                     expect(tree["w:lvl"]).to.include({
                         "w:rPr": [{ "w:u": [{ _attr: { "w:val": "single" } }] }],
@@ -302,7 +302,7 @@ describe("AbstractNumbering", () => {
 
                 it("should set the style if given", () => {
                     const abstractNumbering = new AbstractNumbering(1);
-                    const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").underline("double");
+                    const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").underline("double");
                     const tree = new Formatter().format(level);
                     expect(tree["w:lvl"]).to.include({
                         "w:rPr": [{ "w:u": [{ _attr: { "w:val": "double" } }] }],
@@ -311,7 +311,7 @@ describe("AbstractNumbering", () => {
 
                 it("should set the style and color if given", () => {
                     const abstractNumbering = new AbstractNumbering(1);
-                    const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").underline("double", "005599");
+                    const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").underline("double", "005599");
                     const tree = new Formatter().format(level);
                     expect(tree["w:lvl"]).to.include({
                         "w:rPr": [{ "w:u": [{ _attr: { "w:val": "double", "w:color": "005599" } }] }],
@@ -321,7 +321,7 @@ describe("AbstractNumbering", () => {
 
             it("#color", () => {
                 const abstractNumbering = new AbstractNumbering(1);
-                const level = abstractNumbering.createLevel(0, "lowerRoman", "%0.").color("123456");
+                const level = abstractNumbering.createLevel(0, 1, "lowerRoman", "%0.").color("123456");
                 const tree = new Formatter().format(level);
                 expect(tree["w:lvl"]).to.include({
                     "w:rPr": [{ "w:color": [{ _attr: { "w:val": "123456" } }] }],

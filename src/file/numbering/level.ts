@@ -248,8 +248,8 @@ export class LevelBase extends XmlComponent {
 export class Level extends LevelBase {
     // This is the level that sits under abstractNum. We make a
     // handful of properties required
-    constructor(level: number, numberFormat: string, levelText: string, lvlJc: string) {
-        super(level, 1, numberFormat, levelText, lvlJc);
+    constructor(level: number, start:number, numberFormat: string, levelText: string, lvlJc: string) {
+        super(level, start, numberFormat, levelText, lvlJc);
     }
 }
 
