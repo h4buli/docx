@@ -23,7 +23,7 @@ class NumAttributes extends XmlAttributeComponent<INumAttributesProperties> {
 export class Num extends XmlComponent {
     public id: number;
 
-    constructor(numId: number, abstractNumId: number) {
+    constructor(numId: number, public abstractNumId: number) {
         super("w:num");
         this.root.push(
             new NumAttributes({
@@ -34,8 +34,8 @@ export class Num extends XmlComponent {
         this.id = numId;
     }
 
-    public overrideLevel(num: number, start?: number): LevelOverride {
-        const olvl = new LevelOverride(num, start);
+    public overrideLevel(num: number, startOverride?: number, start?: number, numberFormat?: string, levelText?: string, lvlJc?: string): LevelOverride {
+        const olvl = new LevelOverride(num, startOverride, start, numberFormat, levelText, lvlJc);
         this.root.push(olvl);
         return olvl;
     }
@@ -48,11 +48,21 @@ class LevelOverrideAttributes extends XmlAttributeComponent<{ ilvl: number }> {
 export class LevelOverride extends XmlComponent {
     private lvl?: LevelForOverride;
 
-    constructor(private readonly levelNum: number, start?: number) {
+    constructor(private readonly levelNum: number, 
+                startOverride?: number, 
+                private start?: number, 
+                private numberFormat?: string, 
+                private levelText?: string, 
+                private lvlJc?: string) {
         super("w:lvlOverride");
         this.root.push(new LevelOverrideAttributes({ ilvl: levelNum }));
-        if (start !== undefined) {
-            this.root.push(new StartOverride(start));
+        if (startOverride !== undefined) {
+            this.root.push(new StartOverride(startOverride));
+        }
+
+        if (start !== undefined || numberFormat !== undefined || levelText !== undefined || lvlJc !== undefined) {
+            this.lvl = new LevelForOverride(this.levelNum, this.start, this.numberFormat, this.levelText, this.lvlJc);
+            this.root.push(this.lvl);
         }
     }
 
