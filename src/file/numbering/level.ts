@@ -81,7 +81,7 @@ export class LevelBase extends XmlComponent {
     private readonly paragraphProperties: ParagraphProperties;
     private readonly runProperties: RunProperties;
 
-    constructor(level: number, start?: number, numberFormat?: string, levelText?: string, lvlJc?: string) {
+    constructor(public level: number, public start?: number, public numberFormat?: string, public levelText?: string, public lvlJc?: string) {
         super("w:lvl");
         this.root.push(
             new LevelAttributes({

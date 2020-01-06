@@ -22,6 +22,7 @@ class NumAttributes extends XmlAttributeComponent<INumAttributesProperties> {
 
 export class Num extends XmlComponent {
     public id: number;
+    public levelOverrides: LevelOverride[] = [];
 
     constructor(numId: number, public abstractNumId: number) {
         super("w:num");
@@ -37,6 +38,7 @@ export class Num extends XmlComponent {
     public overrideLevel(num: number, startOverride?: number, start?: number, numberFormat?: string, levelText?: string, lvlJc?: string): LevelOverride {
         const olvl = new LevelOverride(num, startOverride, start, numberFormat, levelText, lvlJc);
         this.root.push(olvl);
+        this.levelOverrides.push(olvl);
         return olvl;
     }
 }
