@@ -10,6 +10,7 @@ import { Tab } from "./tab";
 import { Underline } from "./underline";
 
 import { XmlComponent } from "file/xml-components";
+import { Shading } from "./shading";
 
 export class Run extends XmlComponent {
     private properties: RunProperties;
@@ -92,6 +93,20 @@ export class Run extends XmlComponent {
 
     public style(styleId: string): Run {
         this.properties.push(new Style(styleId));
+        return this;
+    }
+
+    /**
+     * Creates a shading object. 
+     * Shading consists of three components: background color, an optional foreground pattern, and an optional foreground pattern color. 
+     * The resulting shading is applied by first setting the background color, then applying the foreground pattern and foreground pattern color.
+     *
+     * @param backgroundColor color in hex format without #
+     * @param patternColor (optional) color in hex format without #. Defaults to 'auto'
+     * @param pattern (optional) pattern. Defaults to 'clear' (no pattern)
+     */
+    public shading(backgroundColor: string, patternColor?: string, pattern?: string): Run {
+        this.properties.push(new Shading(backgroundColor, patternColor, pattern));
         return this;
     }
 }
